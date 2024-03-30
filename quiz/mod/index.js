@@ -15,6 +15,7 @@ const QuizApanent = {
       }
       // The user wants other people to interact with the quiz. There must be more than two questions, or the quiz is impossible.
       (async function(j) {
+        let points = 0
         async function wait(s) {
           return new Promise(function(res) {
             setTimeout(function() {
@@ -24,10 +25,19 @@ const QuizApanent = {
         }
         
         for (const question of j.questions) {
-          if (!"text" in j) {
+          if (!"text" in question) {
             throw new Error("Every question defined must have the 'text' parameter.")
           }
+          let quizB = []
           questionText.innerText = question.text
+          if (!"possibleAnswers" in question) {
+            throw new Error("Every question defined must have the 'possibleAnswers' parameter. This lets people select one of the answers.")
+          }
+          for (const answer of question.possibleAnswers) {
+            const button = document.createElement("button")
+            quizB.push(button)
+            button.innerText = String(answer.answer)
+          }
         }
       })(json)
     }
