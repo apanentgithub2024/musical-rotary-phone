@@ -1,4 +1,50 @@
 <script src="/mod/index.js"></script>
 <script>
-  
+  const quiz = QuizApanent.quizJSON({
+    questions: [
+      {
+        text: "What is 3 * 2?",
+        possibleAnswers: [
+          {
+            answer: "6",
+            correct: true
+          },
+          {
+            answer: "4",
+            correct: false
+          },
+          {
+            answer: "9",
+            correct: false
+          },
+          {
+            answer: "12",
+            correct: false
+          }
+        ]
+      },
+      {
+        text: "What is 5 * 3?",
+        possibleAnswers: [
+          {
+            answer: "10",
+            correct: false
+          },
+          {
+            answer: "8",
+            correct: false
+          },
+          {
+            answer: "15",
+            correct: true
+          },
+          {
+            answer: "20",
+            correct: false
+          }
+        ]
+      }
+    ]
+  })
+document.body.appendChild(quiz)
 </script>
