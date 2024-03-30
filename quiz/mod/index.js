@@ -37,6 +37,7 @@ const QuizApanent = {
             const button = document.createElement("button")
             quizB.push(button)
             button.innerText = String(answer.answer)
+            answerSheet.appendChild(button)
           }
         }
       })(json)
