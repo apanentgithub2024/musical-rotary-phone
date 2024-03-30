@@ -25,6 +25,7 @@ const QuizApanent = {
         }
         
         for (const question of j.questions) {
+          let nextpressed = false
           if (!"text" in question) {
             throw new Error("Every question defined must have the 'text' parameter.")
           }
@@ -33,11 +34,48 @@ const QuizApanent = {
           if (!"possibleAnswers" in question) {
             throw new Error("Every question defined must have the 'possibleAnswers' parameter. This lets people select one of the answers.")
           }
+          
           for (const answer of question.possibleAnswers) {
             const button = document.createElement("button")
+            button.json = answer
             quizB.push(button)
             button.innerText = String(answer.answer)
             answerSheet.appendChild(button)
+            if (!"correct" in answer) {
+              button.disabled = true
+            }
+            button.onclick = function() {
+              quizB.filter(item => item !== button).forEach(function(button2) {
+                if (button2.json.correct) {
+                  button2.style.backgroundColor = "green"
+                } else {
+                  button2.style.backgroundColor = "darkred"
+                }
+                button2.disabled = true
+                button2.onclick = function() {}
+              })
+              button.disabled = true
+              button.onclick = function() {}
+              if (answer.correct) {
+                points += ("points" in answer ? answer.points : 1)
+                button2.style.backgroundColor = "lime"
+              } else {
+                points -= ("wrongPoints" in answer ? answer.wrongPoints : 1)
+                button2.style.backgroundColor = "red"
+              }
+              const next = document.createElement("button")
+              answerSheet.appendChild(next)
+              next.innerText = "Next question"
+              next.onclick = function() {
+                nextpressed = true
+              }
+            }
+            while (nextpressed == false) {
+              await wait(0.1)
+            }
+            answerSheet.querySelectorAll("buttons").forEach(function(button) {
+              button.remove()
+            })
           }
         }
       })(json)
