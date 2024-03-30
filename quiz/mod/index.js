@@ -74,7 +74,7 @@ const QuizApanent = {
           while (nextpressed == false) {
             await wait(0.1)
           }
-          answerSheet.querySelectorAll("buttons").forEach(function(button) {
+          answerSheet.querySelectorAll("button").forEach(function(button) {
             button.remove()
           })
         }
