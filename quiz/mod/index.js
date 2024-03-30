@@ -58,10 +58,10 @@ const QuizApanent = {
               button.onclick = function() {}
               if (answer.correct) {
                 points += ("points" in answer ? answer.points : 1)
-                button2.style.backgroundColor = "lime"
+                button.style.backgroundColor = "lime"
               } else {
                 points -= ("wrongPoints" in answer ? answer.wrongPoints : 1)
-                button2.style.backgroundColor = "red"
+                button.style.backgroundColor = "red"
               }
               const next = document.createElement("button")
               answerSheet.appendChild(next)
@@ -70,13 +70,13 @@ const QuizApanent = {
                 nextpressed = true
               }
             }
-            while (nextpressed == false) {
-              await wait(0.1)
-            }
-            answerSheet.querySelectorAll("buttons").forEach(function(button) {
-              button.remove()
-            })
           }
+          while (nextpressed == false) {
+            await wait(0.1)
+          }
+          answerSheet.querySelectorAll("buttons").forEach(function(button) {
+            button.remove()
+          })
         }
       })(json)
     }
